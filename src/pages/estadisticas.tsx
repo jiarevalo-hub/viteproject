@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Navbar from '../componentes/Navbar';
 import './styles/Estadisticas.css';
 
 interface Tarea {
@@ -14,34 +14,27 @@ interface EstadisticasProps {
 }
 
 const Estadisticas: React.FC<EstadisticasProps> = ({ listaTareas }) => {
-  // Cálculos automáticos basados en las props que vienen de App.tsx
+  // Cálculos automáticos basados en los datos compartidos de App.tsx
   const totalTareas = listaTareas.length;
   const completadas = listaTareas.filter(tarea => tarea.completada).length;
   const pendientes = listaTareas.filter(tarea => !tarea.completada).length;
 
-  // Porcentaje de progreso para la barra visual
+  // Cálculo del porcentaje de progreso para la barra visual
   const porcentajeProgreso = totalTareas > 0 ? Math.round((completadas / totalTareas) * 100) : 0;
 
   return (
     <div className="home-container">
-      {/* Menú de Navegación Premium con enlaces reales (Links) */}
-      <nav className="home-nav">
-        <div className="nav-logo"><span className="logo-icon">⚡</span>TaskApp</div>
-        <ul className="nav-links">
-          <li><Link to="/" className="nav-link-item"><span>Inicio</span></Link></li>
-          <li><Link to="/tasks" className="nav-link-item"><span>Tareas</span></Link></li>
-          <li><Link to="/stats" className="nav-link-item active"><span>Estadísticas</span></Link></li>
-        </ul>
-      </nav>
+      {/* Componente Obligatorio de Navegación */}
+      <Navbar />
 
-      {/* Contenido Principal */}
+      {/* Panel de Estadísticas (Stats) */}
       <main className="home-main estadisticas-main-layout">
         <header className="home-header">
           <h1 className="home-title">Estadísticas de Rendimiento</h1>
           <p className="home-welcome">Un vistazo general de tu productividad y objetivos alcanzados.</p>
         </header>
 
-        {/* Panel de Tarjetas de Indicadores */}
+        {/* Cuadrícula de Indicadores Mínimos Requeridos */}
         <div className="stats-grid">
           
           <div className="stat-card total">
@@ -55,7 +48,7 @@ const Estadisticas: React.FC<EstadisticasProps> = ({ listaTareas }) => {
           <div className="stat-card completadas">
             <div className="stat-icon">✅</div>
             <div className="stat-info">
-              <h4>Completadas</h4>
+              <h4>Tareas completadas</h4>
               <p className="stat-number">{completadas}</p>
             </div>
           </div>
@@ -63,7 +56,7 @@ const Estadisticas: React.FC<EstadisticasProps> = ({ listaTareas }) => {
           <div className="stat-card pendientes">
             <div className="stat-icon">⏳</div>
             <div className="stat-info">
-              <h4>Pendientes</h4>
+              <h4>Tareas pendientes</h4>
               <p className="stat-number">{pendientes}</p>
             </div>
           </div>

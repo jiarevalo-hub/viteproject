@@ -270,3 +270,9 @@
   background-color: #4f46e5;
   color: white;
 }
+
+.nav-link-item, .btn {
+  text-decoration: none; /* Crucial para que los componentes <Link> no se subrayen */
+  display: inline-flex;
+  align-items: center;
+}

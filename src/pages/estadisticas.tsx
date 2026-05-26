@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './styles/Estadisticas.css';
 
 interface Tarea {
@@ -9,28 +10,27 @@ interface Tarea {
 }
 
 interface EstadisticasProps {
-  cambiarPantalla: (pantalla: string) => void;
   listaTareas: Tarea[];
 }
 
-const Estadisticas: React.FC<EstadisticasProps> = ({ cambiarPantalla, listaTareas }) => {
-  // Cálculos matemáticos de las tareas
+const Estadisticas: React.FC<EstadisticasProps> = ({ listaTareas }) => {
+  // Cálculos automáticos basados en las props que vienen de App.tsx
   const totalTareas = listaTareas.length;
   const completadas = listaTareas.filter(tarea => tarea.completada).length;
   const pendientes = listaTareas.filter(tarea => !tarea.completada).length;
 
-  // Cálculo del porcentaje de progreso
+  // Porcentaje de progreso para la barra visual
   const porcentajeProgreso = totalTareas > 0 ? Math.round((completadas / totalTareas) * 100) : 0;
 
   return (
     <div className="home-container">
-      {/* Menú de Navegación Unificado */}
+      {/* Menú de Navegación Premium con enlaces reales (Links) */}
       <nav className="home-nav">
-        <div className="nav-logo"><span className="logo-icon"></span>TaskApp</div>
+        <div className="nav-logo"><span className="logo-icon">⚡</span>TaskApp</div>
         <ul className="nav-links">
-          <li><button className="nav-btn" onClick={() => cambiarPantalla('home')}><span>Inicio</span></button></li>
-          <li><button className="nav-btn" onClick={() => cambiarPantalla('tareas')}><span>Tareas</span></button></li>
-          <li><button className="nav-btn active" onClick={() => cambiarPantalla('estadisticas')}><span>Estadísticas</span></button></li>
+          <li><Link to="/" className="nav-link-item"><span>Inicio</span></Link></li>
+          <li><Link to="/tasks" className="nav-link-item"><span>Tareas</span></Link></li>
+          <li><Link to="/stats" className="nav-link-item active"><span>Estadísticas</span></Link></li>
         </ul>
       </nav>
 
@@ -70,7 +70,7 @@ const Estadisticas: React.FC<EstadisticasProps> = ({ cambiarPantalla, listaTarea
 
         </div>
 
-        {/* Barra de Progreso Visual Extra */}
+        {/* Barra de Progreso Visual */}
         <div className="progress-section">
           <div className="progress-labels">
             <span>Progreso General</span>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Tareas from './pages/tareas';
-import Estadisticas from './pages/estadisticas'; // <-- Importamos la nueva página
+import Estadisticas from './pages/estadisticas';
 
 interface Tarea {
   id: number;
@@ -11,40 +12,26 @@ interface Tarea {
 }
 
 const App: React.FC = () => {
-  const [pantalla, setPantalla] = useState<string>('home');
-  
-  // El estado de las tareas ahora vive aquí para compartirse globalmente
   const [listaTareas, setListaTareas] = useState<Tarea[]>([
-    { id: 1, nombre: 'Estudiar React', prioridad: 'Alta', completada: true },
-    { id: 2, nombre: 'Diseñar la base de datos', prioridad: 'Media', completada: false },
-    { id: 3, nombre: 'Configurar estilos CSS', prioridad: 'Baja', completada: false },
+    { id: 1, nombre: 'Estudiar React con Vite', prioridad: 'Alta', completada: true },
+    { id: 2, nombre: 'Configurar React Router', prioridad: 'Media', completada: false },
   ]);
 
-  const renderPantalla = () => {
-    switch (pantalla) {
-      case 'home':
-        return <Home cambiarPantalla={setPantalla} />;
-      case 'tareas':
-        return (
-          <Tareas 
-            cambiarPantalla={setPantalla} 
-            listaTareas={listaTareas} 
-            setListaTareas={setListaTareas} 
-          />
-        );
-      case 'estadisticas':
-        return (
-          <Estadisticas 
-            cambiarPantalla={setPantalla} 
-            listaTareas={listaTareas} 
-          />
-        );
-      default:
-        return <Home cambiarPantalla={setPantalla} />;
-    }
-  };
-
-  return <div className="app-container">{renderPantalla()}</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route 
+          path="/tasks" 
+          element={<Tareas listaTareas={listaTareas} setListaTareas={setListaTareas} />} 
+        />
+        <Route 
+          path="/stats" 
+          element={<Estadisticas listaTareas={listaTareas} />} 
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default App;

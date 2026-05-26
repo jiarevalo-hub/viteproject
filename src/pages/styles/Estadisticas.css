@@ -1,15 +1,15 @@
-/* Importa los estilos base de la aplicación */
-
+/* Importa de manera automática el fondo, tipografías y barra de navegación */
+@import './Home.css';
 
 .estadisticas-main-layout {
   justify-content: flex-start;
-  padding-top: 2rem;
+  padding-top: 1rem;
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* Distribución de Tarjetas en filas/columnas */
+/* Distribución de Tarjetas */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -18,12 +18,12 @@
   margin-top: 2rem;
 }
 
-/* Estilo Base de las Tarjetas */
+/* Diseño de cada tarjeta indicadora */
 .stat-card {
   background: #ffffff;
   padding: 1.5rem;
   border-radius: 0.75rem;
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   border: 1px solid #e5e7eb;
   display: flex;
   align-items: center;
@@ -37,43 +37,42 @@
 }
 
 .stat-icon {
-  font-size: 2.2rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
+  font-size: 2rem;
   background-color: #f3f4f6;
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 0.5rem;
 }
 
 .stat-info h4 {
   margin: 0;
-  font-size: 0.95rem;
-  color: var(--text-muted);
+  font-size: 0.9rem;
+  color: #6b7280;
   font-weight: 600;
 }
 
 .stat-number {
-  margin: 0.25rem 0 0 0;
-  font-size: 2rem;
+  margin: 0.2rem 0 0 0;
+  font-size: 1.8rem;
   font-weight: 800;
-  color: var(--text-main);
+  color: #111827;
 }
 
-/* Variaciones sutiles de color para cada indicador */
+/* Bordes de color temáticos */
 .stat-card.total { border-left: 4px solid #4f46e5; }
 .stat-card.completadas { border-left: 4px solid #10b981; }
 .stat-card.pendientes { border-left: 4px solid #f59e0b; }
 
-/* Sección de la barra de progreso */
+/* Componente de la Barra de Progreso */
 .progress-section {
   background: #ffffff;
   width: 100%;
-  padding: 1.75rem;
+  padding: 1.5rem;
   border-radius: 0.75rem;
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   border: 1px solid #e5e7eb;
   margin-top: 2rem;
   box-sizing: border-box;
@@ -83,7 +82,7 @@
   display: flex;
   justify-content: space-between;
   font-weight: 700;
-  color: var(--text-main);
+  color: #111827;
   margin-bottom: 0.75rem;
 }
 
@@ -99,17 +98,13 @@
   background: linear-gradient(90deg, #4f46e5, #10b981);
   height: 100%;
   border-radius: 6px;
-  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.4s ease;
 }
 
-/* Responsivo para Tablets y Celulares */
+/* Responsivo para celulares */
 @media (max-width: 768px) {
   .stats-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
-  }
-  
-  .estadisticas-main-layout {
-    padding: 1rem;
   }
 }

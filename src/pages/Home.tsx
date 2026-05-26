@@ -1,65 +1,32 @@
-import "../pages/styles/Home.css"; // Asegúrate de tener este archivo CSS para los estilos
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './styles/Home.css';
 
-// 1. AGREGA ESTA INTERFACE ANTES DEL COMPONENTE
-interface HomeProps {
-  cambiarPantalla: (pantalla: string) => void;
-}
-
-// 2. ASEGÚRATE DE DESTRUCTURAR LA PROP ENTRE LAS LLAVES { cambiarPantalla }
-const Home: React.FC<HomeProps> = ({ cambiarPantalla }) => {
-
-
+const Home: React.FC = () => {
   return (
-
-    <>
     <div className="home-container">
-      {/* Tu código del menú y botones que usan cambiarPantalla('tareas') */}
-    </div>
-
-      <div className="home-container">
-      {/* Menú de Navegación */}
       <nav className="home-nav">
-        <div className="nav-logo">TaskApp</div>
+        <div className="nav-logo"><span className="logo-icon">⚡</span>TaskApp</div>
         <ul className="nav-links">
-          <li>
-            <button className="nav-btn active" onClick={() => cambiarPantalla('home')}>
-              Inicio
-            </button>
-          </li>
-          <li>
-            <button className="nav-btn" onClick={() => cambiarPantalla('tareas')}>
-              Tareas
-            </button>
-          </li>
-          <li><button className="nav-btn" onClick={() => cambiarPantalla('estadisticas')}><span>Estadísticas</span></button></li>
+          <li><Link to="/" className="nav-link-item active"><span>Inicio</span></Link></li>
+          <li><Link to="/tasks" className="nav-link-item"><span>Tareas</span></Link></li>
+          <li><Link to="/stats" className="nav-link-item"><span>Estadísticas</span></Link></li>
         </ul>
       </nav>
 
       <main className="home-main">
         <header className="home-header">
           <h1 className="home-title">Gestor de Tareas Pro</h1>
-          <p className="home-welcome">¡Hola de nuevo! Organiza tu día de forma Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo aperiam nihil esse porro at ducimus, officia ipsam quisquam cum aut, dolore error quae itaque, recusandae voluptate atque tenetur earum facere. eficiente Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus eius explicabo nobis dicta excepturi rem laboriosam in sequi provident placeat suscipit velit dolorum, voluptatum doloremque quae tenetur autem quis ab..</p>
+          <p className="home-welcome">¡Hola de nuevo! Organiza tu día de forma eficiente.</p>
         </header>
 
-        {/* Sección de Botones Obligatorios */}
         <section className="home-actions">
-          <button className="btn btn-primary" onClick={() => cambiarPantalla('tareas')}>
-            <span className="btn-icon">📋</span> Ir a tareas
-          </button>
-          
-          <button className="btn btn-secondary" onClick={() => cambiarPantalla('estadisticas')}>
-            <span className="btn-icon">📊</span> Ir a estadísticas
-          </button>
+          <Link to="/tasks" className="btn btn-primary">📋 Ir a tareas</Link>
+          <Link to="/stats" className="btn btn-secondary">📊 Ir a estadísticas</Link>
         </section>
       </main>
     </div>
-
-    </>
-
   );
-
-  
 };
 
 export default Home;

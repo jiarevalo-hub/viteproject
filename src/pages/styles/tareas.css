@@ -162,35 +162,8 @@
   color: #10b981;
 }
 
-/* Adaptabilidad para Móviles */
-@media (max-width: 768px) {
-  .tareas-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-}
 
-
-.task-input {
-  background-color: var(--background-card);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-.task-input:focus {
-  border-color: #3b82f6; /* Un color azul brillante al hacer clic */
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-}
-
-.task-input::placeholder {
-  color: var(--text-secondary);
-}
-
-/* ==========================================================================
-   Estilos para el Buscador en Tiempo Real
-   ========================================================================== */
+/*Estilos para el Buscador en Tiempo Real*/
 
 .search-container {
   margin-bottom: 1.5rem;

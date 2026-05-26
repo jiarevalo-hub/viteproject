@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Tareas from './pages/tareas';
 import Estadisticas from './pages/estadisticas';
+import './App.css';
 
 export interface Task {
   id: number;

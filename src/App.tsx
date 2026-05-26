@@ -1,50 +1,50 @@
-import { useState } from "react";
-import type { Task } from "./types/Task";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Tasks from "./pages/Tasks";
-import Stats from "./pages/Stats";
-import "./index.css";
+import React, { useState } from 'react';
+import Home from './pages/Home';
+import Tareas from './pages/tareas';
+import Estadisticas from './pages/estadisticas'; // <-- Importamos la nueva página
 
-export default function App() {
-  const [page, setPage] = useState<string>("home");
-  const [tasks, setTasks] = useState<Task[]>([
-    { id: 1, title: "Estudiar React con TypeScript", priority: "Alta",  completed: false },
-    { id: 2, title: "Revisar conceptos de hooks",    priority: "Media", completed: true  },
-    { id: 3, title: "Completar actividad integradora", priority: "Alta", completed: false },
+interface Tarea {
+  id: number;
+  nombre: string;
+  prioridad: 'Alta' | 'Media' | 'Baja';
+  completada: boolean;
+}
+
+const App: React.FC = () => {
+  const [pantalla, setPantalla] = useState<string>('home');
+  
+  // El estado de las tareas ahora vive aquí para compartirse globalmente
+  const [listaTareas, setListaTareas] = useState<Tarea[]>([
+    { id: 1, nombre: 'Estudiar React', prioridad: 'Alta', completada: true },
+    { id: 2, nombre: 'Diseñar la base de datos', prioridad: 'Media', completada: false },
+    { id: 3, nombre: 'Configurar estilos CSS', prioridad: 'Baja', completada: false },
   ]);
 
-  function handleAdd(newTask: Omit<Task, "id" | "completed">): void {
-    setTasks((prev) => [
-      ...prev,
-      { id: Date.now(), ...newTask, completed: false },
-    ]);
-  }
+  const renderPantalla = () => {
+    switch (pantalla) {
+      case 'home':
+        return <Home cambiarPantalla={setPantalla} />;
+      case 'tareas':
+        return (
+          <Tareas 
+            cambiarPantalla={setPantalla} 
+            listaTareas={listaTareas} 
+            setListaTareas={setListaTareas} 
+          />
+        );
+      case 'estadisticas':
+        return (
+          <Estadisticas 
+            cambiarPantalla={setPantalla} 
+            listaTareas={listaTareas} 
+          />
+        );
+      default:
+        return <Home cambiarPantalla={setPantalla} />;
+    }
+  };
 
-  function handleToggle(id: number): void {
-    setTasks((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
-    );
-  }
+  return <div className="app-container">{renderPantalla()}</div>;
+};
 
-  function handleDelete(id: number): void {
-    setTasks((prev) => prev.filter((t) => t.id !== id));
-  }
-
-  return (
-    <div className="app">
-      <Navbar page={page} setPage={setPage} />
-
-      {page === "home"  && <Home  setPage={setPage} tasks={tasks} />}
-      {page === "tasks" && (
-        <Tasks
-          tasks={tasks}
-          onAdd={handleAdd}
-          onToggle={handleToggle}
-          onDelete={handleDelete}
-        />
-      )}
-      {page === "stats" && <Stats tasks={tasks} />}
-    </div>
-  );
-}
+export default App;

@@ -1,0 +1,173 @@
+/* Importa los estilos del Home para mantener fondo, fuentes y menú idénticos */
+
+
+/* Contenedor específico para el área de tareas */
+.tareas-main-layout {
+  justify-content: flex-start; /* Permite que crezca hacia abajo si hay muchas tareas */
+  padding-top: 2rem;
+}
+
+/* Distribución en dos columnas integradas al estilo limpio de la app */
+.tareas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px;
+  text-align: left;
+  margin-top: 1rem;
+}
+
+/* Secciones estilizadas como tarjetas blancas semi-transparentes modernas */
+.form-seccion, .lista-seccion {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  border: 1px solid #e5e7eb;
+}
+
+.form-seccion h3, .lista-seccion h3 {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  font-size: 1.2rem;
+  color: var(--text-main);
+  border-bottom: 2px solid #f3f4f6;
+  padding-bottom: 0.5rem;
+}
+
+/* Formulario interno */
+.tarea-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.select-prioridad {
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.select-prioridad:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.btn-full {
+  width: 100%;
+  justify-content: center;
+  
+}
+
+/* Lista de Tareas */
+.lista-vacia {
+  color: #9ca3af;
+  text-align: center;
+  font-style: italic;
+  padding: 1.5rem 0;
+}
+
+.lista-tareas {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tarea-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #f9fafb;
+}
+
+/* Botón de estado interactivo */
+.btn-status {
+  background: none;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.btn-status:hover {
+  background-color: #e5e7eb;
+}
+
+.tarea-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.tarea-nombre {
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* Badges de prioridad */
+.badge-prioridad {
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badge-prioridad.alta { background-color: #fee2e2; color: #ef4444; }
+.badge-prioridad.media { background-color: #fef3c7; color: #f59e0b; }
+.badge-prioridad.baja { background-color: #d1fae5; color: #10b981; }
+
+/* Estados completados */
+.tarea-item.completada {
+  background-color: #f3f4f6;
+  opacity: 0.65;
+}
+
+.tarea-item.completada .tarea-nombre {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.tarea-item.completada .btn-status {
+  background-color: #d1fae5;
+  border-color: #10b981;
+  color: #10b981;
+}
+
+/* Adaptabilidad para Móviles */
+@media (max-width: 768px) {
+  .tareas-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

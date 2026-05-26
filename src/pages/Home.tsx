@@ -1,49 +1,65 @@
-import type { Task } from "../types/Task";
+import "../pages/styles/Home.css"; // Asegúrate de tener este archivo CSS para los estilos
+import React from 'react';
 
+// 1. AGREGA ESTA INTERFACE ANTES DEL COMPONENTE
 interface HomeProps {
-  setPage: (page: string) => void;
-  tasks: Task[];
+  cambiarPantalla: (pantalla: string) => void;
 }
 
-export default function Home({ setPage, tasks }: HomeProps) {
-  const done = tasks.filter((t) => t.completed).length;
-  const pending = tasks.filter((t) => !t.completed).length;
+// 2. ASEGÚRATE DE DESTRUCTURAR LA PROP ENTRE LAS LLAVES { cambiarPantalla }
+const Home: React.FC<HomeProps> = ({ cambiarPantalla }) => {
+
 
   return (
-    <div className="home">
-      <p className="home__eyebrow">// sistema de gestión de tareas</p>
-      <h1 className="home__title">
-        Organiza tu<br />
-        <span>flujo de trabajo</span>
-        <br />
-        sin fricción.
-      </h1>
-      <p className="home__desc">
-        Una SPA interactiva para gestionar tus tareas personales. Agrega,
-        completa y analiza tu productividad en tiempo real.
-      </p>
-      <div className="home__actions">
-        <button className="btn-primary" onClick={() => setPage("tasks")}>
-          → Ir a tareas
-        </button>
-        <button className="btn-secondary" onClick={() => setPage("stats")}>
-          Ver estadísticas
-        </button>
-      </div>
-      <div className="home__decoration">
-        <div className="deco-card">
-          <div className="deco-card__num">{tasks.length}</div>
-          <div className="deco-card__label">total tareas</div>
-        </div>
-        <div className="deco-card">
-          <div className="deco-card__num">{done}</div>
-          <div className="deco-card__label">completadas</div>
-        </div>
-        <div className="deco-card">
-          <div className="deco-card__num">{pending}</div>
-          <div className="deco-card__label">pendientes</div>
-        </div>
-      </div>
+
+    <>
+    <div className="home-container">
+      {/* Tu código del menú y botones que usan cambiarPantalla('tareas') */}
     </div>
+
+      <div className="home-container">
+      {/* Menú de Navegación */}
+      <nav className="home-nav">
+        <div className="nav-logo">TaskApp</div>
+        <ul className="nav-links">
+          <li>
+            <button className="nav-btn active" onClick={() => cambiarPantalla('home')}>
+              Inicio
+            </button>
+          </li>
+          <li>
+            <button className="nav-btn" onClick={() => cambiarPantalla('tareas')}>
+              Tareas
+            </button>
+          </li>
+          <li><button className="nav-btn" onClick={() => cambiarPantalla('estadisticas')}><span>Estadísticas</span></button></li>
+        </ul>
+      </nav>
+
+      <main className="home-main">
+        <header className="home-header">
+          <h1 className="home-title">Gestor de Tareas Pro</h1>
+          <p className="home-welcome">¡Hola de nuevo! Organiza tu día de forma Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo aperiam nihil esse porro at ducimus, officia ipsam quisquam cum aut, dolore error quae itaque, recusandae voluptate atque tenetur earum facere. eficiente Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus eius explicabo nobis dicta excepturi rem laboriosam in sequi provident placeat suscipit velit dolorum, voluptatum doloremque quae tenetur autem quis ab..</p>
+        </header>
+
+        {/* Sección de Botones Obligatorios */}
+        <section className="home-actions">
+          <button className="btn btn-primary" onClick={() => cambiarPantalla('tareas')}>
+            <span className="btn-icon">📋</span> Ir a tareas
+          </button>
+          
+          <button className="btn btn-secondary" onClick={() => cambiarPantalla('estadisticas')}>
+            <span className="btn-icon">📊</span> Ir a estadísticas
+          </button>
+        </section>
+      </main>
+    </div>
+
+    </>
+
   );
-}
+
+  
+};
+
+export default Home;

@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 
 interface TaskFormProps {
-  onAddTask: (nombre: string, prioridad: 'Alta' | 'Media' | 'Baja') => void;
+  onAddTask: (title: string, priority: string) => void;
 }
 
 const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
-  const [nombre, setNombre] = useState<string>('');
-  const [prioridad, setPrioridad] = useState<'Alta' | 'Media' | 'Baja'>('Media');
+  const [title, setTitle] = useState<string>('');
+  const [priority, setPriority] = useState<string>('Media');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (nombre.trim() === '') return;
-    onAddTask(nombre, prioridad);
-    setNombre('');
-    setPrioridad('Media');
+    if (title.trim() === '') return;
+    onAddTask(title, priority);
+    setTitle('');
+    setPriority('Media');
   };
 
   return (
@@ -26,8 +26,8 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
             id="nombre-tarea"
             type="text"
             placeholder="Ej. Estudiar TypeScript..."
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             className="task-input"
           />
         </div>
@@ -35,13 +35,13 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
           <label htmlFor="prioridad-tarea">Prioridad:</label>
           <select
             id="prioridad-tarea"
-            value={prioridad}
-            onChange={(e) => setPrioridad(e.target.value as 'Alta' | 'Media' | 'Baja')}
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
             className="select-prioridad"
           >
-            <option value="Alta">Alta 🔥</option>
-            <option value="Media">Media ⚡</option>
-            <option value="Baja">Baja 🟢</option>
+            <option value="Alta">Alta</option>
+            <option value="Media">Media</option>
+            <option value="Baja">Baja</option>
           </select>
         </div>
         <button type="submit" className="btn btn-primary btn-full">Agregar tarea</button>

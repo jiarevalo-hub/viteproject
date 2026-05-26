@@ -1,31 +1,25 @@
 import React from 'react';
-
-interface Tarea {
-  id: number;
-  nombre: string;
-  prioridad: 'Alta' | 'Media' | 'Baja';
-  completada: boolean;
-}
+import type { Task } from '../App';
 
 interface TaskItemProps {
-  tarea: Tarea;
+  task: Task;
   onToggle: (id: number) => void;
   onDelete: (id: number) => void;
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ tarea, onToggle, onDelete }) => {
+const TaskItem: React.FC<TaskItemProps> = ({ task, onToggle, onDelete }) => {
   return (
-    <li className={`tarea-item ${tarea.completada ? 'completada' : ''}`}>
-      <button className="btn-status" onClick={() => onToggle(tarea.id)}>
-        {tarea.completada ? '✔' : '⏳'}
+    <li className={`tarea-item ${task.completed ? 'completada' : ''}`}>
+      <button className="btn-status" onClick={() => onToggle(task.id)}>
+        {task.completed ? '✔' : '⏳'}
       </button>
       <div className="tarea-info">
-        <span className="tarea-nombre">{tarea.nombre}</span>
-        <span className={`badge-prioridad ${tarea.prioridad.toLowerCase()}`}>
-          {tarea.prioridad}
+        <span className="tarea-nombre">{task.title}</span>
+        <span className={`badge-prioridad ${task.priority.toLowerCase()}`}>
+          {task.priority}
         </span>
       </div>
-      <button className="btn-eliminar" onClick={() => onDelete(tarea.id)} title="Eliminar tarea">
+      <button className="btn-eliminar" onClick={() => onDelete(task.id)} title="Eliminar tarea">
         🗑️
       </button>
     </li>

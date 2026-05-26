@@ -1,31 +1,25 @@
 import React from 'react';
 import TaskItem from './TaskItem';
-
-interface Tarea {
-  id: number;
-  nombre: string;
-  prioridad: 'Alta' | 'Media' | 'Baja';
-  completada: boolean;
-}
+import type { Task } from '../App';
 
 interface TaskListProps {
-  tareas: Tarea[];
+  tasks: Task[];
   onToggle: (id: number) => void;
   onDelete: (id: number) => void;
 }
 
-const TaskList: React.FC<TaskListProps> = ({ tareas, onToggle, onDelete }) => {
+const TaskList: React.FC<TaskListProps> = ({ tasks, onToggle, onDelete }) => {
   return (
     <section className="lista-seccion">
-      <h3>Lista de Tareas ({tareas.length})</h3>
-      {tareas.length === 0 ? (
+      <h3>Lista de Tareas ({tasks.length})</h3>
+      {tasks.length === 0 ? (
         <p className="lista-vacia">No hay tareas pendientes. ¡Buen trabajo!</p>
       ) : (
         <ul className="lista-tareas">
-          {tareas.map((tarea) => (
+          {tasks.map((task) => (
             <TaskItem 
-              key={tarea.id} 
-              tarea={tarea} 
+              key={task.id} 
+              task={task} 
               onToggle={onToggle} 
               onDelete={onDelete} 
             />

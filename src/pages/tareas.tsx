@@ -3,37 +3,33 @@ import Navbar from '../componentes/Navbar';
 import TaskForm from '../componentes/TaskForm';
 import TaskList from "../componentes/TaskList";
 import './styles/tareas.css';
+import type { Task } from '../App';
 
-interface Tarea {
-  id: number;
-  nombre: string;
-  prioridad: 'Alta' | 'Media' | 'Baja';
-  completada: boolean;
-}
 
 interface TareasProps {
-  listaTareas: Tarea[];
-  setListaTareas: React.Dispatch<React.SetStateAction<Tarea[]>>;
+  
+  tasks: Task[];
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
-const Tareas: React.FC<TareasProps> = ({ listaTareas, setListaTareas }) => {
+const Tareas: React.FC<TareasProps> = ({ tasks, setTasks }) => {
   
-  const handleAgregar = (nombre: string, prioridad: 'Alta' | 'Media' | 'Baja') => {
-    const nueva = { id: Date.now(), nombre, prioridad, completada: false };
-    setListaTareas([...listaTareas, nueva]);
+  const handleAgregar = (title: string, priority: string) => {
+    const nueva: Task = { id: Date.now(), title, priority, completed: false };
+    setTasks([...tasks, nueva]);
   };
 
   const handleToggle = (id: number) => {
-    setListaTareas(listaTareas.map(t => t.id === id ? { ...t, completada: !t.completada } : t));
+    setTasks(tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t));
   };
 
   const handleEliminar = (id: number) => {
-    setListaTareas(listaTareas.filter(t => t.id !== id));
+    setTasks(tasks.filter(t => t.id !== id));
   };
 
   return (
     <div className="home-container">
-      <Navbar /> {/* Componente Obligatorio 1 */}
+      <Navbar />
       
       <main className="home-main tareas-main-layout">
         <header className="home-header">
@@ -42,12 +38,12 @@ const Tareas: React.FC<TareasProps> = ({ listaTareas, setListaTareas }) => {
         </header>
 
         <div className="tareas-grid">
-          <TaskForm onAddTask={handleAgregar} />   {/* Componente Obligatorio 2 */}
+          <TaskForm onAddTask={handleAgregar} />
           <TaskList 
-            tareas={listaTareas} 
+            tasks={tasks} 
             onToggle={handleToggle} 
             onDelete={handleEliminar} 
-          /> {/* Componentes Obligatorios 3 y 4 internos */}
+          />
         </div>
       </main>
     </div>

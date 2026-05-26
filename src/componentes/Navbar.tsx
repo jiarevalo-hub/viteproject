@@ -2,11 +2,13 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
-  const location = useLocation(); // Nos dice en qué URL estamos para poner la clase 'active'
+  const location = useLocation(); // Detecta en qué URL está el usuario para activar el estilo premium
 
   return (
     <nav className="home-nav">
-      <div className="nav-logo"><span className="logo-icon">⚡</span>TaskApp</div>
+      <div className="nav-logo">
+    TaskApp
+      </div>
       <ul className="nav-links">
         <li>
           <Link to="/" className={`nav-link-item ${location.pathname === '/' ? 'active' : ''}`}>

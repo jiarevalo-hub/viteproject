@@ -50,10 +50,8 @@ const Navbar: React.FC = () => {
             style={{
               background: 'none',
               border: 'none',
-              fontSize: '1.3rem',
               cursor: 'pointer',
               marginLeft: '1rem',
-              padding: '5px'
             }}
             title={darkMode ? "Cambiar a Modo Claro" : "Cambiar a Modo Oscuro"}
           >
